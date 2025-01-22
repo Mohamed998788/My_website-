@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توليد حساسيات Free Fire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* التصميم العام */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            transition: background 0.5s ease;
+        }
+
+        /* شريط التنقل الرئيسي */
+        .navbar {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .navbar a.active {
+            background: #28a745;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        /* الصفحة الرئيسية */
+        .container {
+            padding: 120px 20px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            animation: slideIn 0.5s ease-in-out;
+            color: #ffdd57;
+        }
+
+        /* خيارات سرعة الحساسية */
+        .speed-options,
+        .fire-button-size-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .speed-options label,
+        .fire-button-size-options label {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 120px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .speed-options label:hover,
+        .fire-button-size-options label:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .speed-options label i,
+        .fire-button-size-options label i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ffdd57;
+            transition: all 0.3s ease;
+        }
+
+        .speed-options input[type="radio"],
+        .fire-button-size-options input[type="radio"] {
+            display: none;
+        }
+
+        .speed-options input[type="radio"]:checked + label,
+        .fire-button-size-options input[type="radio"]:checked + label {
+            background: #28a745;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        /* زر توليد الحساسيات */
+        button {
+            background: #28a745;
+            color: #fff;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        button:hover {
+            background: #218838;
+            transform: translateY(-3px);
+        }
+
+        /* النتائج */
+        .result {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .result div {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* توليد إعدادات الجرافيك */
+        .graphics-settings {
+            margin-top: 20px;
+        }
+
+        .graphics-result {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .graphics-result div {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* الرسوم المتحركة */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* الثيم الداكن */
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f2027, #203a43);
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        body.dark-mode .container {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode .result,
+        body.dark-mode .graphics-result {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* علامة مائية */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        /* تعديل الأيقونات الخاصة بحجم زر الضرب */
+        .fire-button-size-options label i.fa-mouse-pointer {
+            font-size: 2rem;
+        }
+
+        .fire-button-size-options label i.fa-mouse-pointer.small {
+            font-size: 1.5rem;
+        }
+
+        .fire-button-size-options label i.fa-mouse-pointer.medium {
+            font-size: 2rem;
+        }
+
+        .fire-button-size-options label i.fa-mouse-pointer.large {
+            font-size: 2.5rem;
+        }
+
+        .fire-button-size-options label:hover i {
+            animation: rotate 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل الرئيسي -->
+    <div class="navbar">
+        <a href="#home" onclick="showPage('home')" title="الرئيسية"><i class="fas fa-home"></i></a>
+        <a href="#settings" onclick="showPage('settings')" title="الإعدادات"><i class="fas fa-cog"></i></a>
+        <a href="#saved-sensitivities" onclick="showPage('saved-sensitivities')" title="الحساسيات المحفوظة"><i class="fas fa-save"></i></a>
+        <a href="#contact" onclick="showPage('contact')" title="تواصل معنا"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div class="container" id="home">
+        <h1>توليد حساسيات Free Fire</h1>
+        
+        <!-- خيارات سرعة الحساسية -->
+        <h2>سرعة الحساسية</h2>
+        <div class="speed-options">
+            <input type="radio" name="speed" id="slow" value="slow">
+            <label for="slow" title="بطيئة"><i class="fas fa-user"></i> بطيئة</label>
+            <input type="radio" name="speed" id="medium" value="medium">
+            <label for="medium" title="متوسطة"><i class="fas fa-walking"></i> متوسطة</label>
+            <input type="radio" name="speed" id="fast" value="fast" checked>
+            <label for="fast" title="سريعة"><i class="fas fa-running"></i> سريعة</label>
+        </div>
+
+        <!-- خيارات حجم زر الضرب -->
+        <h2>حجم زر الضرب</h2>
+        <div class="fire-button-size-options">
+            <input type="radio" name="fire-button-size" id="small" value="small">
+            <label for="small" title="صغير"><i class="fas fa-mouse-pointer small"></i> صغير</label>
+            <input type="radio" name="fire-button-size" id="medium-size" value="medium" checked>
+            <label for="medium-size" title="متوسط"><i class="fas fa-mouse-pointer medium"></i> متوسط</label>
+            <input type="radio" name="fire-button-size" id="large" value="large">
+            <label for="large" title="كبير"><i class="fas fa-mouse-pointer large"></i> كبير</label>
+        </div>
+
+        <!-- توليد الحساسيات -->
+        <button onclick="calculateSensitivity()">توليد الحساسيات التلقائية</button>
+        <button onclick="generateRandomSensitivity()" style="margin-top: 10px;"><i class="fas fa-random"></i> توليد حساسية أخرى</button>
+        
+        <div class="result" id="result"></div>
+
+        <!-- توليد إعدادات الجرافيك -->
+        <div class="graphics-settings">
+            <button onclick="generateGraphicsSettings()">توليد إعدادات الجرافيك</button>
+            <div class="graphics-result" id="graphics-result"></div>
+        </div>
+
+        <!-- حفظ الإعدادات -->
+        <button onclick="saveSettings()" style="margin-top: 20px;"><i class="fas fa-save"></i> حفظ الإعدادات</button>
+    </div>
+
+    <!-- صفحة الإعدادات -->
+    <div class="container" id="settings" style="display: none;">
+        <h1>الإعدادات</h1>
+        <div class="settings-content">
+            <h2>تغيير حجم الخط</h2>
+            <input type="range" min="12" max="24" value="16" id="font-size">
+            <span id="font-size-value">16px</span>
+
+            <h2>تغيير اللغة</h2>
+            <select id="language-select">
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="it">Italiano</option>
+                <option value="pt">Português</option>
+            </select>
+
+            <h2>تغيير الثيم</h2>
+            <button onclick="toggleDarkMode()"><i class="fas fa-moon"></i> تفعيل الوضع الليلي</button>
+        </div>
+    </div>
+
+    <!-- صفحة الحساسيات المحفوظة -->
+    <div class="container saved-sensitivities-page" id="saved-sensitivities" style="display: none;">
+        <h1>الإعدادات المحفوظة</h1>
+        <ul id="saved-sensitivities-list"></ul>
+    </div>
+
+    <!-- صفحة التواصل معنا -->
+    <div class="container contact-page" id="contact" style="display: none;">
+        <h1>تواصل معنا</h1>
+        <div class="contact-content">
+            <h2>الدعم الفني</h2>
+            <p>للاستفسارات أو الدعم الفني، يرجى التواصل عبر:</p>
+            <ul>
+                <li><strong>البريد الإلكتروني:</strong> <a href="mailto:support@example.com">support@example.com</a></li>
+                <li><strong>الهاتف:</strong> +123456789</li>
+            </ul>
+            <h2>وسائل التواصل الاجتماعي</h2>
+            <p>تابعنا على وسائل التواصل الاجتماعي:</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <!-- علامة مائية -->
+        <div class="watermark">Mohamed Youssef</div>
+    </div>
+
+    <script>
+        // التعرف التلقائي على أبعاد الشاشة
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        // حساب الحساسية الأساسية (نطاق من 0 إلى 200)
+        const baseSensitivity = Math.round((width / height) * 100);
+
+        // توليد حجم زر الضرب بناءً على اختيار المستخدم
+        function generateFireButtonSize() {
+            const sizeOption = document.querySelector('input[name="fire-button-size"]:checked').value;
+            if (sizeOption === "small") {
+                return Math.floor(Math.random() * (30 - 10 + 1)) + 10; // من 10 إلى 30
+            } else if (sizeOption === "medium") {
+                return Math.floor(Math.random() * (70 - 40 + 1)) + 40; // من 40 إلى 70
+            } else if (sizeOption === "large") {
+                return Math.floor(Math.random() * (100 - 80 + 1)) + 80; // من 80 إلى 100
+            }
+        }
+
+        // عوامل تصحيح لكل نوع من الحساسيات
+        let sensitivities = {
+            general: Math.min(baseSensitivity + 80, 200), // حساسية العاب
+            redDot: Math.min(baseSensitivity + 70, 200), // حساسية النقطة الحمراء
+            scope2x: Math.min(baseSensitivity + 60, 200), // حساسية سكوب 2x
+            scope4x: Math.min(baseSensitivity + 50, 200), // حساسية سكوب 4x
+            sniper: Math.min(baseSensitivity + 40, 200), // حساسية القناصة
+            freeLook: Math.min(baseSensitivity + 90, 200), // حساسية النظر الحر
+            fireButtonSize: generateFireButtonSize() // حجم زر الضرب
+        };
+
+        // توليد حساسية عشوائية بناءً على السرعة المختارة
+        function generateRandomSensitivity() {
+            const speed = document.querySelector('input[name="speed"]:checked').value;
+
+            // تحديد النطاق العشوائي بناءً على السرعة
+            let rangeMin, rangeMax;
+            if (speed === "fast") {
+                rangeMin = 150;
+                rangeMax = 200;
+            } else if (speed === "medium") {
+                rangeMin = 100;
+                rangeMax = 180;
+            } else if (speed === "slow") {
+                rangeMin = 50;
+                rangeMax = 150;
+            }
+
+            // توليد حساسيات عشوائية ضمن النطاق المحدد
+            sensitivities.general = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
+            sensitivities.redDot = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
+            sensitivities.scope2x = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
+            sensitivities.scope4x = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
+            sensitivities.sniper = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
+            sensitivities.freeLook = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
+            sensitivities.fireButtonSize = generateFireButtonSize(); // تحديث حجم زر الضرب
+
+            displaySensitivities();
+        }
+
+        // عرض الحساسيات التلقائية
+        function calculateSensitivity() {
+            const speed = document.querySelector('input[name="speed"]:checked').value;
+
+            // تعديل الحساسيات بناءً على السرعة المختارة
+            if (speed === "fast") {
+                sensitivities.general = Math.min(baseSensitivity + 150, 200); // زيادة الحساسية
+                sensitivities.redDot = Math.min(baseSensitivity + 140, 200);
+                sensitivities.scope2x = Math.min(baseSensitivity + 130, 200);
+                sensitivities.scope4x = Math.min(baseSensitivity + 120, 200);
+                sensitivities.sniper = Math.min(baseSensitivity + 110, 200);
+                sensitivities.freeLook = Math.min(baseSensitivity + 160, 200);
+            } else if (speed === "medium") {
+                sensitivities.general = Math.min(baseSensitivity + 120, 200);
+                sensitivities.redDot = Math.min(baseSensitivity + 110, 200);
+                sensitivities.scope2x = Math.min(baseSensitivity + 100, 200);
+                sensitivities.scope4x = Math.min(baseSensitivity + 90, 200);
+                sensitivities.sniper = Math.min(baseSensitivity + 80, 200);
+                sensitivities.freeLook = Math.min(baseSensitivity + 130, 200);
+            } else if (speed === "slow") {
+                sensitivities.general = Math.min(baseSensitivity + 90, 200);
+                sensitivities.redDot = Math.min(baseSensitivity + 80, 200);
+                sensitivities.scope2x = Math.min(baseSensitivity + 70, 200);
+                sensitivities.scope4x = Math.min(baseSensitivity + 60, 200);
+                sensitivities.sniper = Math.min(baseSensitivity + 50, 200);
+                sensitivities.freeLook = Math.min(baseSensitivity + 100, 200);
+            }
+
+            sensitivities.fireButtonSize = generateFireButtonSize(); // تحديث حجم زر الضرب
+            displaySensitivities();
+        }
+
+        // عرض الحساسيات في الجدول
+        function displaySensitivities() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <div>حساسية العاب: ${sensitivities.general}</div>
+                <div>حساسية النقطة الحمراء: ${sensitivities.redDot}</div>
+                <div>حساسية سكوب 2x: ${sensitivities.scope2x}</div>
+                <div>حساسية سكوب 4x: ${sensitivities.scope4x}</div>
+                <div>حساسية القناصة: ${sensitivities.sniper}</div>
+                <div>حساسية النظر الحر: ${sensitivities.freeLook}</div>
+                <div>حجم زر الضرب: ${sensitivities.fireButtonSize}</div>
+            `;
+        }
+
+        // توليد إعدادات الجرافيك
+        function generateGraphicsSettings() {
+            const ram = navigator.deviceMemory || 4; // الرام (بالجيجابايت)
+            const processorCores = navigator.hardwareConcurrency || 4; // عدد أنوية المعالج
+            const storage = navigator.storage.estimate().then(estimate => {
+                return (estimate.quota / (1024 * 1024 * 1024)).toFixed(2); // المساحة (بالجيجابايت)
+            });
+
+            let graphicsLevel;
+            if (ram >= 8 && processorCores >= 4) {
+                graphicsLevel = "فائقة";
+            } else if (ram >= 4 && processorCores >= 2) {
+                graphicsLevel = "عالية";
+            } else if (ram >= 2 && processorCores >= 1) {
+                graphicsLevel = "متوسطة";
+            } else {
+                graphicsLevel = "منخفضة";
+            }
+
+            storage.then(storageSize => {
+                const graphicsResult = document.getElementById('graphics-result');
+                graphicsResult.innerHTML = `
+                    <div>الرام: ${ram} جيجابايت</div>
+                    <div>أنوية المعالج: ${processorCores}</div>
+                    <div>المساحة: ${storageSize} جيجابايت</div>
+                    <div>إعدادات الجرافيك: ${graphicsLevel}</div>
+                `;
+            });
+        }
+
+        // حفظ الإعدادات (الحساسية، حجم زر الضرب، إعدادات الجرافيك)
+        let savedSettings = [];
+        function saveSettings() {
+            const graphicsSettings = document.getElementById('graphics-result').innerText;
+
+            const settings = {
+                sensitivities: { ...sensitivities },
+                graphicsSettings: graphicsSettings,
+                date: new Date().toLocaleString()
+            };
+            savedSettings.push(settings);
+            updateSavedSettings();
+            alert("تم حفظ الإعدادات بنجاح!");
+        }
+
+        // حذف الإعدادات
+        function deleteSettings(index) {
+            savedSettings.splice(index, 1);
+            updateSavedSettings();
+            alert("تم حذف الإعدادات بنجاح!");
+        }
+
+        // تحديث الإعدادات المحفوظة
+        function updateSavedSettings() {
+            const savedSensitivitiesList = document.getElementById('saved-sensitivities-list');
+            savedSensitivitiesList.innerHTML = savedSettings.map((settings, index) => `
+                <li>
+                    <strong>الإعدادات ${index + 1}:</strong>
+                    <div>حساسية العاب: ${settings.sensitivities.general}</div>
+                    <div>حساسية النقطة الحمراء: ${settings.sensitivities.redDot}</div>
+                    <div>حساسية سكوب 2x: ${settings.sensitivities.scope2x}</div>
+                    <div>حساسية سكوب 4x: ${settings.sensitivities.scope4x}</div>
+                    <div>حساسية القناصة: ${settings.sensitivities.sniper}</div>
+                    <div>حساسية النظر الحر: ${settings.sensitivities.freeLook}</div>
+                    <div>حجم زر الضرب: ${settings.sensitivities.fireButtonSize}</div>
+                    <div>إعدادات الجرافيك: ${settings.graphicsSettings}</div>
+                    <div>التاريخ: ${settings.date}</div>
+                    <button onclick="deleteSettings(${index})">حذف</button>
+                </li>
+            `).join('');
+        }
+
+        // إظهار الصفحة المحددة
+        function showPage(pageId) {
+            document.querySelectorAll('.container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'block';
+
+            // تحديث الأيقونة النشطة في شريط التنقل
+            document.querySelectorAll('.navbar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.navbar a[href="#${pageId}"]`).classList.add('active');
+        }
+
+        // تفعيل الوضع الليلي
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // تغيير حجم الخط
+        document.getElementById('font-size').addEventListener('input', function() {
+            const fontSize = this.value + 'px';
+            document.body.style.fontSize = fontSize;
+            document.getElementById('font-size-value').textContent = fontSize;
+        });
+
+        // تغيير اللغة
+        document.getElementById('language-select').addEventListener('change', function() {
+            const language = this.value;
+            if (language === 'ar') {
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.lang = language;
+                document.documentElement.dir = 'ltr';
+            }
+        });
+
+        // إظهار الصفحة الرئيسية عند التحميل
+        showPage('home');
+    </script>
+
+</body>
+  </html>
