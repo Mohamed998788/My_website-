@@ -22,14 +22,16 @@
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             position: fixed;
-            top: 0;
+            bottom: 0;
             width: 100%;
-            z-index: 1000;
+            height: 80px; /* ارتفاع شريط التنقل */
+            z-index: 1000; /* تأكد من أن شريط التنقل فوق العناصر الأخرى */
             display: flex;
             justify-content: space-around;
             align-items: center;
             padding: 10px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 20px 20px 0 0;
         }
 
         .navbar a {
@@ -54,10 +56,11 @@
 
         /* الصفحة الرئيسية */
         .container {
-            padding: 120px 20px 20px;
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto;
             animation: fadeIn 1s ease-in-out;
+            padding-bottom: 120px; /* زيادة المساحة في الأسفل */
         }
 
         h1 {
@@ -148,6 +151,7 @@
             padding: 20px;
             border-radius: 15px;
             margin-top: 20px;
+            margin-bottom: 100px; /* إضافة مساحة إضافية في الأسفل */
             animation: fadeIn 1s ease-in-out;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -167,6 +171,7 @@
             padding: 20px;
             border-radius: 15px;
             margin-top: 20px;
+            margin-bottom: 100px; /* إضافة مساحة إضافية في الأسفل */
             animation: fadeIn 1s ease-in-out;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -242,128 +247,74 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* علامة مائية */
-        .watermark {
+        /* قائمة منبثقة */
+        .popup-menu {
+            display: none;
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             right: 20px;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
+            animation: slideUp 0.3s ease-in-out;
         }
 
-        /* تعديل الأيقونات الخاصة بحجم زر الضرب */
-        .fire-button-size-options label i.fa-mouse-pointer {
-            font-size: 2rem;
-        }
-
-        .fire-button-size-options label i.fa-mouse-pointer.small {
-            font-size: 1.5rem;
-        }
-
-        .fire-button-size-options label i.fa-mouse-pointer.medium {
-            font-size: 2rem;
-        }
-
-        .fire-button-size-options label i.fa-mouse-pointer.large {
-            font-size: 2.5rem;
-        }
-
-        .fire-button-size-options label:hover i {
-            animation: rotate 1s ease-in-out;
-        }
-
-        /* رسوم متحركة للأيقونات */
-        .speed-options input[type="radio"]:checked + label i.fa-running {
-            animation: run 1s infinite;
-        }
-
-        .speed-options input[type="radio"]:checked + label i.fa-walking {
-            animation: walk 1.5s infinite;
-        }
-
-        .speed-options input[type="radio"]:checked + label i.fa-user {
-            animation: blink 1s infinite;
-        }
-
-        /* أزرار المشاركة والحفظ */
-        .action-buttons {
+        .popup-menu a {
             display: flex;
+            align-items: center;
             gap: 10px;
-            margin-top: 10px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
-        .action-buttons button {
+        .popup-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* تأثيرات بصرية */
+        .visual-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #ffdd57;
+            animation: bounce 1s ease-in-out;
+        }
+
+        /* تحسين التصميم العام */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar a {
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar a.active {
             background: #28a745;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
-        .action-buttons button:hover {
-            background: #218838;
-            transform: translateY(-3px);
-        }
-
-        .action-buttons button i {
-            font-size: 16px;
-        }
-
-        /* رسوم متحركة للحفظ والحذف */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-
-        .saved-sensitivities-page li {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .saved-sensitivities-page li.fade-out {
-            animation: fadeOut 0.5s ease-in-out;
-        }
-
-        /* زر إعادة تعيين لون الثيم */
-        .reset-theme-button {
-            background: #ff4d4d;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .reset-theme-button:hover {
-            background: #cc0000;
-            transform: translateY(-3px);
-        }
-
-        /* صفحة تواصل معنا */
-        .contact-page {
-            padding: 120px 20px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .contact-content {
+        /* تحسين دليل المستخدم */
+        .user-guide-content {
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 15px;
@@ -372,76 +323,82 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .contact-content h2 {
+        .user-guide-content h2 {
             color: #ffdd57;
             margin-bottom: 15px;
         }
 
-        .contact-content p {
+        .user-guide-content p {
             margin-bottom: 15px;
         }
 
-        .contact-content ul {
+        .user-guide-content ul {
             list-style: none;
             padding: 0;
         }
 
-        .contact-content ul li {
+        .user-guide-content ul li {
             margin-bottom: 10px;
         }
 
-        .contact-content ul li strong {
+        .user-guide-content ul li strong {
             color: #ffdd57;
         }
 
-        .social-icons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            color: #fff;
-            font-size: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            color: #ffdd57;
-            transform: translateY(-3px);
-        }
-
-        /* الأسئلة الشائعة */
-        .faq-section {
-            margin-top: 20px;
-        }
-
-        .faq-item {
+        /* تحسين صفحة نصائح لاحتراف فري فاير */
+        .tips-content {
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tips-content h2 {
+            color: #ffdd57;
+            margin-bottom: 15px;
+        }
+
+        .tips-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-content ul li {
             margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .faq-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .faq-item h3 {
-            margin: 0;
+        .tips-content ul li strong {
             color: #ffdd57;
         }
 
-        .faq-item p {
-            margin: 10px 0 0;
-            display: none;
-            animation: slideDown 0.3s ease-in-out;
+        /* تحسين صفحة حول الموقع */
+        .about-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .faq-item.active p {
-            display: block;
+        .about-content h2 {
+            color: #ffdd57;
+            margin-bottom: 15px;
+        }
+
+        .about-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-content ul li {
+            margin-bottom: 10px;
+        }
+
+        .about-content ul li strong {
+            color: #ffdd57;
         }
     </style>
 </head>
@@ -453,6 +410,14 @@
         <a href="#settings" onclick="showPage('settings')" title="الإعدادات"><i class="fas fa-cog"></i></a>
         <a href="#saved-sensitivities" onclick="showPage('saved-sensitivities')" title="الحساسيات المحفوظة"><i class="fas fa-save"></i></a>
         <a href="#contact" onclick="showPage('contact')" title="تواصل معنا"><i class="fas fa-envelope"></i></a>
+        <a href="#more" onclick="togglePopupMenu()" title="المزيد"><i class="fas fa-ellipsis-h"></i></a>
+    </div>
+
+    <!-- قائمة منبثقة -->
+    <div class="popup-menu" id="popupMenu">
+        <a href="#tips" onclick="showPage('tips')"><i class="fas fa-lightbulb"></i> نصائح لاحتراف فري فاير</a>
+        <a href="#user-guide" onclick="showPage('user-guide')"><i class="fas fa-book"></i> دليل المستخدم</a>
+        <a href="#about" onclick="showPage('about')"><i class="fas fa-info-circle"></i> حول الموقع</a>
     </div>
 
     <!-- الصفحة الرئيسية -->
@@ -533,14 +498,14 @@
             <p>للاستفسارات أو الدعم الفني، يرجى التواصل عبر:</p>
             <ul>
                 <li><strong>البريد الإلكتروني:</strong> <a href="mailto:Mohamed.youssef142011@gmail.com">Mohamed.youssef142011@gmail.com</a></li>
-                <li><strong>الهاتف:</strong> +123456789</li>
+                <li><strong>الهاتف:</strong> +201015025850</li>
             </ul>
             <h2>وسائل التواصل الاجتماعي</h2>
             <p>تابعنا على وسائل التواصل الاجتماعي:</p>
             <div class="social-icons">
-                <a href="https://www.facebook.com/share/1FMPUGd6aR/" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://youtube.com/@red_____999?si=U3_oIQt25Ei42OOl" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://wa.me/qr/E6V7RGV5GNHVK1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
 
             <!-- الأسئلة الشائعة -->
@@ -560,8 +525,80 @@
                 </div>
             </div>
         </div>
-        <!-- علامة مائية -->
-        <div class="watermark">Mohamed Youssef</div>
+    </div>
+
+    <!-- صفحة نصائح لاحتراف فري فاير -->
+    <div class="container" id="tips" style="display: none;">
+        <h1>نصائح لاحتراف فري فاير</h1>
+        <div class="tips-content">
+            <h2>نصائح عامة</h2>
+            <ul>
+                <li>استخدم الغطاء بشكل فعال لتجنب النيران المعادية.</li>
+                <li>حاول دائمًا البقاء في حركة مستمرة لتجنب أن تكون هدفًا سهلًا.</li>
+                <li>استخدم السماعات لتحديد موقع الأعداء من خلال الأصوات.</li>
+                <li>تعلم كيفية استخدام الأدوات بشكل فعال مثل القنابل والدخان.</li>
+                <li>حاول دائمًا البقاء في مناطق آمنة وتجنب المناطق المفتوحة.</li>
+                <li>استخدم المركبات للتنقل بسرعة وتجنب الأعداء.</li>
+                <li>تعلم كيفية استخدام الأسلحة المختلفة بشكل فعال.</li>
+                <li>حاول دائمًا البقاء في فريق والتواصل مع زملائك.</li>
+                <li>تعلم كيفية استخدام الأدوات الطبية بشكل فعال.</li>
+                <li>حاول دائمًا البقاء في مناطق آمنة وتجنب المناطق المفتوحة.</li>
+            </ul>
+            <h2>نصائح للتصويب</h2>
+            <ul>
+                <li>حاول دائمًا التصويب نحو الرأس للحصول على أكبر قدر من الضرر.</li>
+                <li>استخدم الأسلحة المناسبة للمسافات المختلفة.</li>
+                <li>تدرب على التصويب في الوضع التدريبي لتحسين مهاراتك.</li>
+                <li>تعلم كيفية استخدام الأدوات بشكل فعال مثل القنابل والدخان.</li>
+                <li>حاول دائمًا البقاء في مناطق آمنة وتجنب المناطق المفتوحة.</li>
+                <li>استخدم المركبات للتنقل بسرعة وتجنب الأعداء.</li>
+                <li>تعلم كيفية استخدام الأسلحة المختلفة بشكل فعال.</li>
+                <li>حاول دائمًا البقاء في فريق والتواصل مع زملائك.</li>
+                <li>تعلم كيفية استخدام الأدوات الطبية بشكل فعال.</li>
+                <li>حاول دائمًا البقاء في مناطق آمنة وتجنب المناطق المفتوحة.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- صفحة دليل المستخدم -->
+    <div class="container" id="user-guide" style="display: none;">
+        <h1>دليل المستخدم</h1>
+        <div class="user-guide-content">
+            <h2>كيفية استخدام التطبيق</h2>
+            <p>1. اختر سرعة الحساسية المفضلة لديك من الخيارات المتاحة.</p>
+            <p>2. اختر حجم زر الضرب المناسب لك.</p>
+            <p>3. اضغط على زر "توليد الحساسيات التلقائية" للحصول على الإعدادات المثالية.</p>
+            <p>4. يمكنك حفظ الإعدادات أو مشاركتها مع الأصدقاء.</p>
+            <p>5. استخدم صفحة الإعدادات لتغيير حجم الخط واللغة والثيم.</p>
+            <p>6. استخدم صفحة الحساسيات المحفوظة لعرض الإعدادات التي قمت بحفظها.</p>
+            <p>7. استخدم صفحة التواصل معنا للتواصل مع الدعم الفني.</p>
+            <p>8. استخدم صفحة نصائح لاحتراف فري فاير لتحسين مهاراتك في اللعبة.</p>
+            <p>9. استخدم صفحة دليل المستخدم لفهم كيفية استخدام التطبيق بشكل أفضل.</p>
+            <p>10. استخدم صفحة حول الموقع لمعرفة المزيد عن التطبيق.</p>
+            <p>11. استخدم صفحة الأسئلة الشائعة للعثور على إجابات للأسئلة الشائعة.</p>
+            <p>12. استخدم صفحة الإعدادات لتغيير حجم الخط واللغة والثيم.</p>
+            <p>13. استخدم صفحة الحساسيات المحفوظة لعرض الإعدادات التي قمت بحفظها.</p>
+            <p>14. استخدم صفحة التواصل معنا للتواصل مع الدعم الفني.</p>
+            <p>15. استخدم صفحة نصائح لاحتراف فري فاير لتحسين مهاراتك في اللعبة.</p>
+            <p>16. استخدم صفحة دليل المستخدم لفهم كيفية استخدام التطبيق بشكل أفضل.</p>
+            <p>17. استخدم صفحة حول الموقع لمعرفة المزيد عن التطبيق.</p>
+            <p>18. استخدم صفحة الأسئلة الشائعة للعثور على إجابات للأسئلة الشائعة.</p>
+            <p>19. استخدم صفحة الإعدادات لتغيير حجم الخط واللغة والثيم.</p>
+            <p>20. استخدم صفحة الحساسيات المحفوظة لعرض الإعدادات التي قمت بحفظها.</p>
+        </div>
+    </div>
+
+    <!-- صفحة حول الموقع -->
+    <div class="container" id="about" style="display: none;">
+        <h1>حول الموقع</h1>
+        <div class="about-content">
+            <h2>معلومات عن الموقع</h2>
+            <ul>
+                <li><strong>رقم الإصدار:</strong> 1.0.0</li>
+                <li><strong>منشئ الموقع:</strong> Mohamed Youssef</li>
+                <li><strong>لغة برمجة الموقع:</strong> HTML, CSS, JavaScript</li>
+            </ul>
+        </div>
     </div>
 
     <script>
@@ -1024,6 +1061,20 @@
                 generateSensitivityButton.textContent = "توليد الحساسيات التلقائية";
                 generateSensitivityButton.onclick = calculateSensitivity;
             });
+        });
+
+        // تبديل القائمة المنبثقة
+        function togglePopupMenu() {
+            const popupMenu = document.getElementById('popupMenu');
+            popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // إغلاق القائمة المنبثقة عند النقر خارجها
+        window.addEventListener('click', function(event) {
+            const popupMenu = document.getElementById('popupMenu');
+            if (event.target !== document.querySelector('.navbar a[href="#more"]') && !popupMenu.contains(event.target)) {
+                popupMenu.style.display = 'none';
+            }
         });
     </script>
 
