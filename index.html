@@ -17,6 +17,26 @@
             transition: background 0.5s ease, color 0.5s ease;
         }
 
+        /* زر تحميل التطبيق في أعلى الصفحة */
+        .get-app-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #28a745;
+            color: #fff;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .get-app-button:hover {
+            background: #218838;
+            transform: translateY(-3px);
+        }
+
         /* شريط التنقل الرئيسي */
         .navbar {
             background: rgba(0, 0, 0, 0.7);
@@ -24,8 +44,8 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            height: 80px; /* ارتفاع شريط التنقل */
-            z-index: 1000; /* تأكد من أن شريط التنقل فوق العناصر الأخرى */
+            height: 80px;
+            z-index: 1000;
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -54,13 +74,40 @@
             box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
         }
 
+        /* شريط التنقل الإضافي */
+        .extra-navbar {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            animation: slideUp 0.3s ease-in-out;
+        }
+
+        .extra-navbar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .extra-navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         /* الصفحة الرئيسية */
         .container {
             padding: 20px;
             max-width: 800px;
             margin: 0 auto;
             animation: fadeIn 1s ease-in-out;
-            padding-bottom: 120px; /* زيادة المساحة في الأسفل */
+            padding-bottom: 120px;
         }
 
         h1 {
@@ -141,7 +188,7 @@
 
         /* زر توليد حساسية أخرى */
         #generate-random-sensitivity {
-            display: none; /* إخفاء الزر بشكل افتراضي */
+            display: none;
             animation: slideUp 0.5s ease-in-out;
         }
 
@@ -151,7 +198,7 @@
             padding: 20px;
             border-radius: 15px;
             margin-top: 20px;
-            margin-bottom: 100px; /* إضافة مساحة إضافية في الأسفل */
+            margin-bottom: 100px;
             animation: fadeIn 1s ease-in-out;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -171,7 +218,7 @@
             padding: 20px;
             border-radius: 15px;
             margin-top: 20px;
-            margin-bottom: 100px; /* إضافة مساحة إضافية في الأسفل */
+            margin-bottom: 100px;
             animation: fadeIn 1s ease-in-out;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -245,72 +292,6 @@
         body.dark-mode .result,
         body.dark-mode .graphics-result {
             background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* قائمة منبثقة */
-        .popup-menu {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            animation: slideUp 0.3s ease-in-out;
-        }
-
-        .popup-menu a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .popup-menu a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* تأثيرات بصرية */
-        .visual-effect {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            color: #ffdd57;
-            animation: bounce 1s ease-in-out;
-        }
-
-        /* تحسين التصميم العام */
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar a {
-            padding: 10px 20px;
-            border-radius: 25px;
-        }
-
-        .navbar a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .navbar a.active {
-            background: #28a745;
         }
 
         /* تحسين دليل المستخدم */
@@ -400,9 +381,65 @@
         .about-content ul li strong {
             color: #ffdd57;
         }
+
+        /* صفحة تحميل التطبيق */
+        .app-download-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .app-download-popup h2 {
+            color: #ffdd57;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .app-download-popup .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .app-download-popup .download-buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .app-download-popup .download-buttons a:hover {
+            background: #218838;
+            transform: translateY(-3px);
+        }
+
+        .app-download-popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- زر تحميل التطبيق في أعلى الصفحة -->
+    <div class="get-app-button" onclick="showAppDownloadPopup()" title="تحميل التطبيق">
+        <i class="fas fa-mobile-alt"></i>
+    </div>
 
     <!-- شريط التنقل الرئيسي -->
     <div class="navbar">
@@ -410,14 +447,23 @@
         <a href="#settings" onclick="showPage('settings')" title="الإعدادات"><i class="fas fa-cog"></i></a>
         <a href="#saved-sensitivities" onclick="showPage('saved-sensitivities')" title="الحساسيات المحفوظة"><i class="fas fa-save"></i></a>
         <a href="#contact" onclick="showPage('contact')" title="تواصل معنا"><i class="fas fa-envelope"></i></a>
-        <a href="#more" onclick="togglePopupMenu()" title="المزيد"><i class="fas fa-ellipsis-h"></i></a>
+        <a href="#more" onclick="toggleExtraNavbar()" title="المزيد"><i class="fas fa-ellipsis-h"></i></a>
     </div>
 
-    <!-- قائمة منبثقة -->
-    <div class="popup-menu" id="popupMenu">
+    <!-- شريط التنقل الإضافي -->
+    <div class="extra-navbar" id="extraNavbar">
         <a href="#tips" onclick="showPage('tips')"><i class="fas fa-lightbulb"></i> نصائح لاحتراف فري فاير</a>
         <a href="#user-guide" onclick="showPage('user-guide')"><i class="fas fa-book"></i> دليل المستخدم</a>
         <a href="#about" onclick="showPage('about')"><i class="fas fa-info-circle"></i> حول الموقع</a>
+    </div>
+
+    <!-- صفحة تحميل التطبيق -->
+    <div class="app-download-popup" id="appDownloadPopup">
+        <span class="close-btn" onclick="closeAppDownloadPopup()">&times;</span>
+        <h2>تحميل التطبيق</h2>
+        <div class="download-buttons">
+            <a href="https://www.mediafire.com/file/tugf7saytz4hgvr/RED+SETTINGS-v1-release.apk/file" target="_blank">APK</a>
+        </div>
     </div>
 
     <!-- الصفحة الرئيسية -->
@@ -497,8 +543,8 @@
             <h2>الدعم الفني</h2>
             <p>للاستفسارات أو الدعم الفني، يرجى التواصل عبر:</p>
             <ul>
-                <li><strong>البريد الإلكتروني:</strong> <a href="mailto:Mohamed.youssef142011@gmail.com">Mohamed.youssef142011@gmail.com</a></li>
-                <li><strong>الهاتف:</strong> +201015025850</li>
+                <li><strong>البريد الإلكتروني:</strong> <a href="mailto:support@example.com">support@example.com</a></li>
+                <li><strong>الهاتف:</strong> +123456789</li>
             </ul>
             <h2>وسائل التواصل الاجتماعي</h2>
             <p>تابعنا على وسائل التواصل الاجتماعي:</p>
@@ -1063,19 +1109,31 @@
             });
         });
 
-        // تبديل القائمة المنبثقة
-        function togglePopupMenu() {
-            const popupMenu = document.getElementById('popupMenu');
-            popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+        // تبديل شريط التنقل الإضافي
+        function toggleExtraNavbar() {
+            const extraNavbar = document.getElementById('extraNavbar');
+            extraNavbar.style.display = extraNavbar.style.display === 'block' ? 'none' : 'block';
         }
 
-        // إغلاق القائمة المنبثقة عند النقر خارجها
+        // إغلاق شريط التنقل الإضافي عند النقر خارجها
         window.addEventListener('click', function(event) {
-            const popupMenu = document.getElementById('popupMenu');
-            if (event.target !== document.querySelector('.navbar a[href="#more"]') && !popupMenu.contains(event.target)) {
-                popupMenu.style.display = 'none';
+            const extraNavbar = document.getElementById('extraNavbar');
+            if (event.target !== document.querySelector('.navbar a[href="#more"]') && !extraNavbar.contains(event.target)) {
+                extraNavbar.style.display = 'none';
             }
         });
+
+        // إظهار صفحة تحميل التطبيق
+        function showAppDownloadPopup() {
+            const appDownloadPopup = document.getElementById('appDownloadPopup');
+            appDownloadPopup.style.display = 'block';
+        }
+
+        // إغلاق صفحة تحميل التطبيق
+        function closeAppDownloadPopup() {
+            const appDownloadPopup = document.getElementById('appDownloadPopup');
+            appDownloadPopup.style.display = 'none';
+        }
     </script>
 
 </body>
