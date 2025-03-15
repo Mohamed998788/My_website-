@@ -1,0 +1,512 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+    overflow-x: hidden;
+  }
+  
+  :root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+    --navbar-color: #343a40;
+    --footer-color: #343a40;
+    
+    /* Shadcn variables */
+    --background: 0 0% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    
+    --chart-1: 221.2 83.2% 53.3%;
+    --chart-2: 180 70% 45%;
+    --chart-3: 39 100% 50%;
+    --chart-4: 300 70% 50%;
+    --chart-5: 120 70% 40%;
+    
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 224.3 76.3% 48%;
+  }
+
+  .dark {
+    --background-color: #121212;
+    --text-color: #e9ecef;
+    --navbar-color: #1e1e1e;
+    --footer-color: #1e1e1e;
+    
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+/* General Styles */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main-content {
+  padding-bottom: 70px; /* Footer height + padding */
+}
+
+/* Particles Background */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 40px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d(-40px, 0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Product Card Styles */
+.product-card {
+  background: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+}
+
+.product-card .card-body {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover .card-body {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* 3D Tilt Effect */
+.product-card .shine-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.product-card:hover .shine-effect {
+  opacity: 0.7;
+}
+
+/* Custom 3D effect for Arabic RTL support */
+.product-card.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.product-card .price-tag {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transform: rotate(0);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.product-card:hover .price-tag {
+  transform: rotate(-5deg) translateX(-5px);
+}
+
+/* RTL support for price tag */
+.product-card.rtl .price-tag {
+  right: auto;
+  left: -15px;
+  border-radius: 0 3px 3px 0;
+}
+
+.product-card.rtl:hover .price-tag {
+  transform: rotate(5deg) translateX(5px);
+}
+
+/* Buttons with gradient and effects */
+.btn-primary, .btn-success, .btn-danger, .btn-google, .btn-whatsapp {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-primary::after, .btn-success::after, .btn-danger::after, 
+.btn-google::after, .btn-whatsapp::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::after, .btn-success:hover::after, .btn-danger:hover::after,
+.btn-google:hover::after, .btn-whatsapp:hover::after {
+  width: 300%;
+  height: 300%;
+}
+
+/* Cart animation */
+.cart-item {
+  transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  transform: translateX(-5px);
+}
+
+/* Navbar animation */
+.navbar {
+  transition: background-color 0.5s ease, padding 0.3s ease;
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffc107;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Theme toggle animation */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle i {
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle:hover i {
+  transform: rotate(360deg);
+}
+
+/* Loading animations */
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 123, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Enhanced page transitions for Framer Motion */
+.page-transition {
+  width: 100%;
+  position: relative;
+  transition: all 0.5s ease;
+  will-change: opacity, transform;
+}
+
+/* Slide transitions */
+.slide-right-enter {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.slide-right-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.slide-right-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-right-exit-active {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+/* Fade transitions */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+/* Scale transitions */
+.scale-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.scale-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.scale-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scale-exit-active {
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+/* Flip transitions */
+.flip-enter {
+  opacity: 0;
+  transform: rotateY(-90deg);
+}
+
+.flip-enter-active {
+  opacity: 1;
+  transform: rotateY(0deg);
+  transition: opacity 0.4s, transform 0.4s;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.flip-exit {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.flip-exit-active {
+  opacity: 0;
+  transform: rotateY(90deg);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+/* Footer styling */
+.footer {
+  transition: background-color 0.5s ease;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px);
+}
